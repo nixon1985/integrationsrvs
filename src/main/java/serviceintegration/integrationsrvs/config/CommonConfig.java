@@ -12,6 +12,7 @@ public class CommonConfig {
     public static String getApiGatewayUrl(){
         return "http://GENERAL-ERP/";
         //return "http://103.129.200.58:8088/";
+
     }
 
 //    public static HttpEntity<Object> getHttpEntity(){
@@ -21,4 +22,5 @@ public class CommonConfig {
 //        HttpEntity<Object> entity = new HttpEntity<>(httpHeaders);
 //        return entity;
 //    }
+
 }
