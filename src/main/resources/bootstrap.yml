@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: INTEGRATION-SRVS
+  cloud:
+    config:
+      uri: http://103.129.200.58:9111
+      #uri: http://103.129.200.58:9111
+eureka:
+ #client:
+ #  register-with-eureka: true
+ #  fetch-registry: true
+ #  service-url:
+ #    defaultZone: http://usr:pass1234@103.129.200.58:9110/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.hostname}:${server.port}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 15
