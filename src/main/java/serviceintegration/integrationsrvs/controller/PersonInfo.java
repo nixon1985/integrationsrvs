@@ -1,32 +1,45 @@
 package serviceintegration.integrationsrvs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.*;
 import serviceintegration.integrationsrvs.config.CommonConfig;
 
 // import org.general.erp.hrm.controller;
 
 
 @RestController
-//@RequestMapping("/person")
+@RequestMapping("/indata")
 public class PersonInfo {
 
+
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+
+    // RestTemplate restTemplate;
 //    @Autowired
-//    RestTemplate restTemplate;
+//    public PersonInfo(RestTemplate restTemplate) {
+//        this.restTemplate = restTemplate;
+//    }
 
 //    @Autowired
 //    HrmDepartmentsController hrmDepartmentsController;
 
-    @RequestMapping("/person")
+    @GetMapping("/person")
     public String getPersonInfo(){
         System.out.println("Hello 2022");
         // return hrmDepartmentsController.findAll();
-        return "dsfsdf";
+        String url = "http://HRM-SRVS/api/v1/hrm/hrmDepartmentsController/getAll";
+
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
     }
 
 //    @GetMapping("/getAllDepartment")
