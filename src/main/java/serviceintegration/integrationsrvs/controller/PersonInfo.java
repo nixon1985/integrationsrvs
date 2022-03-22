@@ -1,26 +1,35 @@
 package serviceintegration.integrationsrvs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.*;
-import serviceintegration.integrationsrvs.config.CommonConfig;
+import serviceintegration.integrationsrvs.client.GatewayClient;
+import serviceintegration.integrationsrvs.model.AccOpeningBalanceDTO;
+
+import java.util.List;
+import java.util.Optional;
 
 // import org.general.erp.hrm.controller;
 
 
 @RestController
-@RequestMapping("/indata")
+@RequestMapping(value = "/indata")
 public class PersonInfo {
 
+    private final GatewayClient gatewayClient;
 
+    public PersonInfo(GatewayClient gatewayClient) {
+        this.gatewayClient = gatewayClient;
+    }
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @GetMapping("/oopBalance")
+    public @ResponseBody
+    List<AccOpeningBalanceDTO> getOopBalance() {
+        return gatewayClient.getOpeningBalanceByFinYear(3,74);
+    }
 
 
     // RestTemplate restTemplate;
@@ -32,15 +41,15 @@ public class PersonInfo {
 //    @Autowired
 //    HrmDepartmentsController hrmDepartmentsController;
 
-    @GetMapping("/person")
-    public String getPersonInfo(){
-        System.out.println("Hello 2022");
-        // return hrmDepartmentsController.findAll();
-        String url = "http://HRM-SRVS/api/v1/hrm/hrmDepartmentsController/getAll";
-
-        String result = restTemplate.getForObject(url, String.class);
-        return result;
-    }
+//    @GetMapping("/person")
+//    public String getPersonInfo(){
+//        System.out.println("Hello 2022");
+//        // return hrmDepartmentsController.findAll();
+//        String url = "http://HRM-SRVS/api/v1/hrm/hrmDepartmentsController/getAll";
+//
+//        String result = restTemplate.getForObject(url, String.class);
+//        return result;
+//    }
 
 //    @GetMapping("/getAllDepartment")
 //    public ResponseEntity<Object[]> getAllDepartment(){
